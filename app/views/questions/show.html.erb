@@ -11,5 +11,9 @@
 </p>
 
 
+  <% @question.users.each do |user|%>
+    <%= user.email %>
+  <%end%>
+
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>
