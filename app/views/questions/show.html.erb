@@ -11,8 +11,8 @@
 </p>
 
 
-  <% @question.users.each do |user|%>
-    <%= user.email %>
+  <% @question.authorships.each do |authorship|%>
+    <%= authorship.user.email %>
   <%end%>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |

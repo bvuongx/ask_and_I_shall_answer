@@ -1,4 +1,4 @@
-class CreateQuestionsUsersTable < ActiveRecord::Migration
+class CreateAuthorships < ActiveRecord::Migration
   def change
     create_table :questions_users, id: false do |t|
       t.integer :question_id
