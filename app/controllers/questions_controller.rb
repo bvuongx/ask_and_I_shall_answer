@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
-
   # GET /questions
   # GET /questions.json
   def index
@@ -43,13 +42,17 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
-    #@question.users << current_user
+    @question.users << current_user
     respond_to do |format|
       if @question.save
+        update_user_question_associations
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render json: @question, status: :created, location: @question }
       else
-        format.html { render action: "new" }
+        format.html {
+          flash[:alert] = "Question has not been created."
+          render action: "new"
+        }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
@@ -59,7 +62,7 @@ class QuestionsController < ApplicationController
   # PUT /questions/1.json
   def update
     @question = Question.find(params[:id])
-    #@question.users << current_user
+    @question.users << current_user
     respond_to do |format|
       if @question.update_attributes(params[:question])
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -76,10 +79,16 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
+    flash[:notice] = "Question has been deleted"
 
     respond_to do |format|
       format.html { redirect_to questions_url }
       format.json { head :no_content }
     end
+  end
+
+private
+  def update_user_question_associations
+    @question.users << current_user
   end
 end

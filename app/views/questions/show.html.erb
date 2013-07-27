@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+ <p id="notice"><%= notice %></p>
 
 <p>
   <b>Ask a question:</b>
@@ -11,9 +11,7 @@
 </p>
 
 
-  <% @question.authorships.each do |authorship|%>
-    <%= authorship.user.email %>
-  <%end%>
+
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>

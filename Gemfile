@@ -1,3 +1,4 @@
+gem 'email_spec', '1.2.1'
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
@@ -33,9 +34,12 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'simplecov', :require => false
   gem 'factory_girl', '2.6.4'
+  gem 'email_spec', '1.2.1'
 end
 
 gem 'devise', '2.1.0'
+
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
